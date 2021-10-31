@@ -1,0 +1,73 @@
+package com.test.codingTest;
+
+import java.util.ArrayList;
+
+public class Prac1 {
+	public static void main(String[] args) {
+		int[] d = {2,2,3,3};
+		int count = solution3(d, 10);
+		System.out.println(count);
+	}
+	
+	public static int solution(int[]d, int budget) {
+		int count = 0;
+		
+		for (int i = 0; i < d.length; i++) {
+			if (d[i] < 1) {
+				continue;
+			}
+			budget -= d[i];
+			count++;
+			
+			if (budget < 0) {
+				count--;
+				return count;
+			}
+		}
+		return count;
+	}
+	
+	public static int solution2(int[]d, int budget) {
+		int count = 0;
+		int i = 0;
+		
+		while(budget-d[i] > 0 && i < d.length) {
+			System.out.println("d["+i+"] : " + d[i]);
+			if (d[i] < 1000) {
+				i++;
+				continue;
+			} else {
+				budget -= d[i];
+				i++;
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public static int solution3(int[]d, int budget) {
+		int count = 0;
+		ArrayList<Integer> list = new ArrayList<>();
+		
+		for (int i = 0; i < d.length; i++) {
+			list.add(d[i]);
+		}
+		list.sort(null);
+		
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i) < 1) {
+				continue;
+			} else {
+				budget -= list.get(i);
+				count++;
+			}
+			if (budget < 0) {
+				count--;
+				return count;
+			} else if (budget == 0) {
+				return count;
+			}
+		}
+		return count;
+	}
+}
