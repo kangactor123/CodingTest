@@ -1,0 +1,28 @@
+package com.test.codingTest;
+
+import java.util.HashSet;
+
+public class prac3 {
+	public static void main(String[] args) {
+		int[] nums = {3,3,3,2,2,2};
+		System.out.println("가져갈 수 있는 포켓몬 수 : " + solution2(nums));
+		
+	}
+	
+	public static int solution2(int[] nums) {
+		// N/2마리 숫자의 포켓몬을 가져갈 수 있음
+		// 리턴해주는 숫자는 가져갈 수 있는 포켓몬 종류의 수
+		// set.size : 포켓몬 종류의 수
+		int max = nums.length/2;
+		HashSet<Integer> set = new HashSet<>();
+		
+		for (int i = 0; i < nums.length; i++) {
+			set.add(nums[i]);
+		}
+		if (set.size() < max) {
+			return set.size();
+		} else {
+			return max;
+		}
+	}
+}
