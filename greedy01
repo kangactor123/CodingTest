@@ -1,0 +1,65 @@
+package greedy;
+
+import java.util.ArrayList;
+
+public class Greedy01 {
+
+	public int countMoney(int change) {
+		int fiveH = 0, oneH = 0, fift = 0, ten = 0;
+
+		if (change > 500) {
+			fiveH = change / 500;
+			change = change - 500 * fiveH;
+		}
+		if (change < 500) {
+			oneH = change / 100;
+			change = change - 100 * oneH;
+		}
+		if (change < 100) {
+			fift = change / 50;
+			change = change - 50 * fift;
+		}
+		if (change < 50) {
+			ten = change / 10;
+		}
+		return (fiveH + oneH + fift + ten);
+	}
+	
+	public int countMoney2(int change) {
+		int count = 0;
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		if (change > 500) {
+			list.add(change/500);
+			change -= list.get(0)*500;
+		}
+		if (change < 500) {
+			list.add(change/100);
+			change -= list.get(1)*100;
+		}
+		if (change < 100) {
+			list.add(change/50);
+			change -= list.get(2)*50;
+		}
+		if (change < 50) {
+			list.add(change/10);
+			change -= list.get(3)*10;
+		}
+		for(int i = 0; i < list.size(); i++) {
+			count += list.get(i);
+		}
+		return count;
+	}
+	
+	public int countMoney3(int change) {
+		int[] coinArr = {500,100,50,10};
+		int count = 0;
+		
+		for (int i = 0; i < coinArr.length; i++) {
+			int coin = coinArr[i];
+			count += change/coin;
+			change %= coin;
+		}
+		return count;
+	}
+}
